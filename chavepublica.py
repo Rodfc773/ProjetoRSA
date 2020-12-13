@@ -6,7 +6,10 @@ def chave_publica():
 
     while(True):
         p = int(input('Digite (p): '))
-        q = int(input('digite (q): '))
+        q = int(input('Digite (q): '))
+        if p == q:
+            interface.error_iguais()
+            continue
         if p * q < 28:
             interface.error_menor_28()
             continue
