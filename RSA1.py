@@ -18,13 +18,13 @@ while (True):
 
         interface.cp()
         x = input('-> ')
-        
+
         if x == '1':
             public_key = input("DIGITE O NOME DO ARQUIVO(SEM A EXTENSÃO): ")
             public_key = public_key + '.txt'
             chave = open(public_key)
 
-            
+
             lst = list()
 
             for line in chave:
@@ -79,7 +79,7 @@ while (True):
         fh = fh + '.txt'
         arquivo = open(fh)
 
-        d = Calculos.linear(e, phi, array=list())
+        d = Calculos.linear(e, phi)
 
         Calculos.descriptografar(arquivo, d, n)
         continue
