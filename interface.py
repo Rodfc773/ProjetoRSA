@@ -24,8 +24,7 @@ def erros_e():
         print('-----| (e) É UM VALOR QUE NÃO ATENDE OS REQUISITOS, POR FAVOR DIGITE NOVAMENTE | -----------')
 
 def p_and_q():
-    print('---------| DESEJA RELEMBRAR O p,q,e DIGITADOS? |--------------')
+    print('---------| DESEJA USAR UM ARQUIVO COM p,q,e ?|--------------')
     print('----------| SIM:(1) NÃO:(0) |----------------------------------')
 def cp():
-    print('---------| DESEJA RELEMBRAR A CHAVE PÚBLICA? |--------------')
-    print('----------| SIM:(1) NÃO:(0) |----------------------------------\n\n')
+    print('---------| DIGITE UM ARQUIVO EXTERNO DE CHAVE PÚBLICA? |--------------\n\n')
