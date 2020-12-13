@@ -52,7 +52,7 @@ def linear(e, phi):
             indices[tamanho - 2] = indices[tamanho - 2] + phi2
 
     inv = indices[tamanho - 2]
-    print(indices[tamanho-2])
+    
     return inv
 
 def limpar_terminal():
