@@ -14,38 +14,30 @@ while (True):
         Calculos.limpar_terminal()
         continue
 
-    while opcao == '2':
+    if opcao == '2':
 
         interface.cp()
         x = input('-> ')
-
-        chave = open('chave_publica.txt')
-        lst = list()
-
-        for line in chave:
-            line = line.rstrip()
-            numbers = line.split()
-            lst.extend(numbers)
-
-        n = int(lst[0])
-        e = int(lst[1])
-
+        
         if x == '1':
-            print('-----| CHAVE PÚBLICA:{} {} |---------'.format(n, e))
+            public_key = input("DIGITE O NOME DO ARQUIVO(SEM A EXTENSÃO): ")
+            public_key = public_key + '.txt'
+            chave = open(public_key)
 
-        verificador = lst[0] +' '+lst[1]
+            
+            lst = list()
 
-        print('---------| DIGITE A CHAVE PUBLICA RECEBIDA PREVIAMENTE: |--------')
+            for line in chave:
+                line = line.rstrip()
+                numbers = line.split()
+                lst.extend(numbers)
 
-        chave2 = input("--> ")
-
-        if(chave2 != verificador):
-            print("A chave pública digitada está incorreta")
-            continue
+            n = int(lst[0])
+            e = int(lst[1])
 
         print("DIGITE UMA MENSAGEM PARA ENCRIPTAR:")
 
-        msgn = input("-->")
+        msgn = input("--> ")
 
         msgn.upper()
 
@@ -53,14 +45,14 @@ while (True):
 
         Calculos.limpar_terminal()
 
-        break
+        continue
 
-    while opcao == '3':
+    if opcao == '3':
 
 
         interface.p_and_q()
 
-        escolha = int(input('--> '))
+        escolha = int(input('-> '))
 
         if escolha == 1:
             fh = open('p_and_q.txt')
@@ -77,15 +69,20 @@ while (True):
         q = int(input('digite (q): '))
         e = int(input('Digite (e): '))
 
+
         phi = (int(p) - 1) * (int(q) - 1)
         e = int(e)
         n = int(p) * int(q)
-        arquivo = open('mensagem_encriptada.txt')
 
-        d = Calculos.linear(e, phi, array = list())
+        fh = input('DIGITE O NOME DO ARQUIVO(SEM A EXTENSÃO):')
+
+        fh = fh + '.txt'
+        arquivo = open(fh)
+
+        d = Calculos.linear(e, phi, array=list())
 
         Calculos.descriptografar(arquivo, d, n)
-        break
+        continue
 
     if int(opcao) > 3 or int(opcao) < 1 :
         break
