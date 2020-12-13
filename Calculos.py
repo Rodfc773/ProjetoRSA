@@ -121,13 +121,7 @@ def primalidade(number):
         return True
 
 def primos_entre_si(e, phi):
-
-    if(primalidade(e)):
-        return True
-    if primalidade(phi):
-        return True
+    if MDC(e, phi) == 1:
+        return  True
     else:
-        if MDC(e, phi) == 1:
-            return  True
-        else:
-            return False
+        return 
