@@ -17,23 +17,22 @@ while (True):
     if opcao == '2':
 
         interface.cp()
-        x = input('-> ')
-
-        if x == '1':
-            public_key = input("DIGITE O NOME DO ARQUIVO(SEM A EXTENSÃO): ")
-            public_key = public_key + '.txt'
-            chave = open(public_key)
 
 
-            lst = list()
+        public_key = input("DIGITE O NOME DO ARQUIVO(SEM A EXTENSÃO): ")
+        public_key = public_key + '.txt'
+        chave = open(public_key)
 
-            for line in chave:
-                line = line.rstrip()
-                numbers = line.split()
-                lst.extend(numbers)
 
-            n = int(lst[0])
-            e = int(lst[1])
+        lst = list()
+
+        for line in chave:
+            line = line.rstrip()
+            numbers = line.split()
+            lst.extend(numbers)
+
+        n = int(lst[0])
+        e = int(lst[1])
 
         print("DIGITE UMA MENSAGEM PARA ENCRIPTAR:")
 
@@ -55,26 +54,33 @@ while (True):
         escolha = int(input('-> '))
 
         if escolha == 1:
-            fh = open('p_and_q.txt')
+
+            fop = input('DIGITE O NOME DO ARQUVO(SEM EXTENSÕES): --> ')
+            fop = fop + '.txt'
+            fh1 = open(fop)
 
             lista = list()
 
-            for line in fh:
+            for line in fh1:
                 line.rstrip()
                 line = line.split()
                 lista.extend(line)
-            print('(p):{},(q):{},(e): {}'.format(int(lista[0]), int(lista[1]), int(lista[2]) ) )
+            p = lista[0]
+            q = lista[1]
+            e = lista[2]
 
-        p = int(input('Digite (p): '))
-        q = int(input('digite (q): '))
-        e = int(input('Digite (e): '))
+            print('\n')
 
+        else:
+            p = int(input('Digite (p): '))
+            q = int(input('digite (q): '))
+            e = int(input('Digite (e): '))
 
         phi = (int(p) - 1) * (int(q) - 1)
         e = int(e)
         n = int(p) * int(q)
 
-        fh = input('DIGITE O NOME DO ARQUIVO(SEM A EXTENSÃO):')
+        fh = input('DIGITE O NOME DO ARQUIVO(SEM A EXTENSÃO) A SER DESCRIPTADO: --> ')
 
         fh = fh + '.txt'
         arquivo = open(fh)
@@ -82,6 +88,8 @@ while (True):
         d = Calculos.linear(e, phi)
 
         Calculos.descriptografar(arquivo, d, n)
+
+        Calculos.limpar_terminal()
         continue
 
     if int(opcao) > 3 or int(opcao) < 1 :
