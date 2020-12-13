@@ -111,16 +111,15 @@ def descriptografar(msg, d, n):
 
 def primalidade(number):
 
-    if (number == 2 or number == 3):
-        return True
-    elif (number <= 1 or number % 2 == 0):
+    if number <= 1:
         return False
+    else:
+        aux = math.ceil(math.sqrt(number))
 
-    for i in range(number):
-        a = random.randint(2, number - 2)
-        if exponenciacao_modular_rapida(a, number - 1, number) != 1:
-            return False
-    return True
+        for i in range(2, aux):
+            if number % i == 0:
+                return  False
+        return True
 
 def primos_entre_si(e, phi):
 
