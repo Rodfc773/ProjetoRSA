@@ -8,30 +8,52 @@ def MDC(a, b):
         return b
     else:
         return MDC(b, a % b)
-def linear(a, b, array):
+def linear(e, phi):
+    phi2 = phi
+    coeficientes = []
+    coeficientes_invertidos = []
+    indices = []
 
-    q = a // b
+    tamanho = 0
+    tabela = 1
 
-    if(a % b == 0):
+    a = e / phi
+    a = int(a)
+    coeficientes.append(a)
+    b = e % phi
 
-        i = len(array) - 1
-        valor = 0
-        multiplicador = 1
-        anterior = 0
+    while (b != 0):
+        e = phi
+        phi = b
+        a = e / phi
+        a = int(a)
+        b = e % phi
 
-        while (i > 0):
+        coeficientes.append(a)
+        tamanho += 1
 
-            valor = array[i] * multiplicador + anterior
-            anterior = multiplicador
-            multiplicador = array[i]
+    j = tamanho - 1
 
-            if i - 1 == 1:
-                t = valor
-            i = i - 1
-        return valor
-    else:
-        array.append(q)
-        return linear(b, a % b, array)
+    for i in range(0, tamanho):
+        coeficientes_invertidos.append(coeficientes[j])
+        j -= 1
+
+    tabela = 1
+    anterior = 0
+
+    for i in range(0, tamanho):
+        indices.append(coeficientes_invertidos[i] * tabela + anterior)
+        anterior = tabela
+        tabela = indices[i]
+
+    if (tamanho % 2 == 0):
+        indices[tamanho - 2] = -indices[tamanho - 2]
+        while (indices[tamanho - 2] < 1):
+            indices[tamanho - 2] = indices[tamanho - 2] + phi2
+
+    inv = indices[tamanho - 2]
+    print(indices[tamanho-2])
+    return inv
 
 def limpar_terminal():
     if (os.name == "nt"):
@@ -53,12 +75,12 @@ def codificar(char, e, n):
     alfabeto = {'A':2, 'B': 3, 'C':4, 'D':5, 'E': 6, 'F' : 7,
     'G' : 8, 'H' : 9, 'I' : 10, 'J' : 11 , 'K' : 12, 'L' : 13,
     'M': 14, 'N' : 15, 'O' : 16, 'P' : 17, 'Q' : 18, 'R' : 19, 'S' : 20,
-    'T' : 21, 'U': 22, 'V' : 23, 'W ': 24, 'X ': 25, 'Y' : 26, 'Z' : 27, ' ' : 28 }
+    'T' : 21, 'U': 22, 'V' : 23, 'W': 24, 'X ': 25, 'Y' : 26, 'Z' : 27, ' ' : 28 }
 
     arquivo = open('mensagem_encriptada.txt', 'w')
 
-    for i in range(len(char)):
-        caracter_encriptado = exponenciacao_modular_rapida(alfabeto[char[i]], e, n)
+    for i in char:
+        caracter_encriptado = exponenciacao_modular_rapida(alfabeto[i], e, n)
         arquivo.write('{} '.format(caracter_encriptado))
 
     arquivo.close()
@@ -70,20 +92,20 @@ def descriptografar(msg, d, n):
                 14:'M', 15:'N', 16: 'O', 17: 'P', 18: 'Q', 19: 'R', 20: 'S',
                 21: 'T', 22 : 'U', 23: 'V', 24: 'W', 25 : 'X', 26 : 'Y', 27: 'Z', 28:' '}
 
-    aquivo = open('mensagem_encriptada.txt')
 
     mensagem = list()
-    x = None
 
     file = open('mensagem_desncriptada.txt', 'w')
-    for number in aquivo:
+    for number in msg:
         number.rstrip()
         number = number.split()
         mensagem.extend(number)
+        print(mensagem)
+
     for i in mensagem:
         i = int(i)
-        x = exponenciacao_modular_rapida(i, d, n)
-        file.write('{}'.format(alfabeto_inverso[x]))
+        y = exponenciacao_modular_rapida(i, d, n)
+        file.write('{}'.format(alfabeto_inverso[y]))
 
     file.close()
 
@@ -92,8 +114,7 @@ def primalidade(number):
     if (number == 2 or number == 3):
         return True
     elif (number <= 1 or number % 2 == 0):
-        return  False
-
+        return False
 
     for i in range(number):
         a = random.randint(2, number - 2)
@@ -108,7 +129,7 @@ def primos_entre_si(e, phi):
     if primalidade(phi):
         return True
     else:
-        if MDC(e , phi) == 1:
+        if MDC(e, phi) == 1:
             return  True
         else:
             return False
