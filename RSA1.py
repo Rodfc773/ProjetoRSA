@@ -10,8 +10,8 @@ while (True):
     if opcao == '1':
 
         cp.chave_publica()
-
         Calculos.limpar_terminal()
+        
         continue
 
     if opcao == '2':
@@ -65,6 +65,7 @@ while (True):
                 line.rstrip()
                 line = line.split()
                 lista.extend(line)
+                
             p = lista[0]
             q = lista[1]
             e = lista[2]
