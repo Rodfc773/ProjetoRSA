@@ -1,5 +1,5 @@
 import random
-import  math
+import math
 import os
 import random
 def MDC(a, b):
@@ -8,52 +8,38 @@ def MDC(a, b):
         return b
     else:
         return MDC(b, a % b)
-def linear(e, phi):
-    phi2 = phi
-    coeficientes = []
-    coeficientes_invertidos = []
-    indices = []
+def linear(a, b, array, b2):
 
-    tamanho = 0
-    tabela = 1
+    q = a // b
 
-    a = e / phi
-    a = int(a)
-    coeficientes.append(a)
-    b = e % phi
+    if(a % b == 0):
 
-    while (b != 0):
-        e = phi
-        phi = b
-        a = e / phi
-        a = int(a)
-        b = e % phi
+        i = len(array) - 1
+        valor = 0
+        multiplicador = 1
+        anterior = 0
+        resul = list()
+        print(array)
+        while (i > 0):
+            print(array[i])
 
-        coeficientes.append(a)
-        tamanho += 1
+            valor = array[i] * multiplicador + anterior
+            anterior = multiplicador
+            multiplicador = valor
+            resul.append(valor)
 
-    j = tamanho - 1
-
-    for i in range(0, tamanho):
-        coeficientes_invertidos.append(coeficientes[j])
-        j -= 1
-
-    tabela = 1
-    anterior = 0
-
-    for i in range(0, tamanho):
-        indices.append(coeficientes_invertidos[i] * tabela + anterior)
-        anterior = tabela
-        tabela = indices[i]
-
-    if (tamanho % 2 == 0):
-        indices[tamanho - 2] = -indices[tamanho - 2]
-        while (indices[tamanho - 2] < 1):
-            indices[tamanho - 2] = indices[tamanho - 2] + phi2
-
-    inv = indices[tamanho - 2]
-    
-    return inv
+            i = i - 1
+        s = resul[len(resul) - 1]
+        print(resul)
+        if (len(resul) - 1) % 2 == 0:
+            s = s * -1
+        while s < 1:
+            s = s + b2
+        print(s)
+        return s
+    else:
+        array.append(q)
+        return linear(b, a % b, array, b2)
 
 def limpar_terminal():
     if (os.name == "nt"):
@@ -72,10 +58,10 @@ def exponenciacao_modular_rapida(m, e, n):
 
 def codificar(char, e, n):
 
-    alfabeto = {'A':2, 'B': 3, 'C':4, 'D':5, 'E': 6, 'F' : 7,
-    'G' : 8, 'H' : 9, 'I' : 10, 'J' : 11 , 'K' : 12, 'L' : 13,
-    'M': 14, 'N' : 15, 'O' : 16, 'P' : 17, 'Q' : 18, 'R' : 19, 'S' : 20,
-    'T' : 21, 'U': 22, 'V' : 23, 'W': 24, 'X': 25, 'Y' : 26, 'Z' : 27, ' ' : 28 }
+    alfabeto = {'A':2, 'B': 3, 'C':4, 'D':5, 'E': 6, 'F': 7,
+    'G' : 8, 'H': 9, 'I' : 10, 'J' : 11 , 'K' : 12, 'L': 13,
+    'M': 14, 'N': 15, 'O' : 16, 'P' : 17, 'Q' : 18, 'R': 19, 'S': 20,
+    'T': 21, 'U': 22, 'V' : 23, 'W': 24, 'X': 25, 'Y': 26, 'Z':27, ' ': 28}
 
     arquivo = open('mensagem_encriptada.txt', 'w')
 
@@ -117,11 +103,11 @@ def primalidade(number):
 
         for i in range(2, aux):
             if number % i == 0:
-                return  False
+                return False
         return True
 
 def primos_entre_si(e, phi):
     if MDC(e, phi) == 1:
-        return  True
+        return True
     else:
-        return 
+        return False
