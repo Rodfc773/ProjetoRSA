@@ -27,4 +27,4 @@ def p_and_q():
     print('---------| DESEJA USAR UM ARQUIVO COM p,q,e ?|--------------')
     print('----------| SIM:(1) NÃO:(0) |----------------------------------')
 def cp():
-    print('---------| DIGITE UM ARQUIVO EXTERNO DE CHAVE PÚBLICA? |--------------\n\n')
+    print('---------| DIGITE UM ARQUIVO EXTERNO DE CHAVE PÚBLICA |--------------\n\n')
