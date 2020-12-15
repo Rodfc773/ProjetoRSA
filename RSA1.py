@@ -10,8 +10,8 @@ while (True):
     if opcao == '1':
 
         cp.chave_publica()
+
         Calculos.limpar_terminal()
-        
         continue
 
     if opcao == '2':
@@ -34,9 +34,22 @@ while (True):
         n = int(lst[0])
         e = int(lst[1])
 
-        print("DIGITE UMA MENSAGEM PARA ENCRIPTAR:")
+        interface.arquvo_mensagem()
+        escolha = input('--> ')
+        
+        if escolha == '1':
+            ih = input('DIGITE O NOME DO ARQUIVO(SEM EXTENSÃO):-> ')
+            ih = ih + '.txt'
+            string = open(ih)
 
-        msgn = input("--> ")
+            msgn = ''
+            for line in string:
+                msgn += line
+            print(msgn)
+            
+        else:
+            print('DIGITE UMA MENSAGEM:\n')
+            msgn = input('--> ')
 
         msgn.upper()
 
@@ -65,7 +78,6 @@ while (True):
                 line.rstrip()
                 line = line.split()
                 lista.extend(line)
-                
             p = lista[0]
             q = lista[1]
             e = lista[2]
@@ -86,12 +98,14 @@ while (True):
         fh = fh + '.txt'
         arquivo = open(fh)
 
-        d = Calculos.linear(e, phi)
+        b = phi
+        array = list()
+        d = Calculos.linear(e, phi, array, b)
 
         Calculos.descriptografar(arquivo, d, n)
 
         Calculos.limpar_terminal()
         continue
 
-    if int(opcao) > 3 or int(opcao) < 1 :
+    if int(opcao) > 3 or int(opcao) < 1:
         break
