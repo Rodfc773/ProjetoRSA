@@ -28,3 +28,6 @@ def p_and_q():
     print('----------| SIM:(1) NÃO:(0) |----------------------------------')
 def cp():
     print('---------| DIGITE UM ARQUIVO EXTERNO DE CHAVE PÚBLICA |--------------\n\n')
+def arquvo_mensagem():
+    print('---------| DEJE USAR UM ARQUVIO DE MENSAGEM JA PREDIFINIDO? |-----------\n')
+    print('---------| SIM : (1) NÃO : (0) |------------------------------')
